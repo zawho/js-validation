@@ -1,1 +1,1 @@
-# js-validation
+October 23, 2023 - I am beginning a small project to test out what I've learned about Javascript form validation and the constraint validation API. I will build a simple HTML form that collects email, country, zip code, and a password + password confirmation. It will use live inline validation to inform the user of whether or not they have filled out the fields correct.
