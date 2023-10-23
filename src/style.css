@@ -2,5 +2,19 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 30px;
+    gap: 10px;
+}
+
+.error-msg {
+    color: red;
+}
+
+input {
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 3px;
+}
+
+input:focus {
+    outline: 2px solid blue;
 }
