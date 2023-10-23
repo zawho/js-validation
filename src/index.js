@@ -15,7 +15,7 @@ function removeFocusStyle() {
 function validateEmailFocusOut() {
     const emailInput = document.querySelector('.email-input');
     const emailErrorMsg = document.querySelector('#email-error-msg');
-    if (emailInput.validity.valueMissing || emailInput.validity.typeMismatch) {
+    if (emailInput.validity.typeMismatch) {
         emailErrorMsg.innerText = 'please enter a valid email address.';
         emailInput.style.border = '1px solid red';
         emailInput.removeEventListener('focus', addValidFocusStyle);
