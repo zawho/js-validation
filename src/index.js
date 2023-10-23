@@ -18,6 +18,7 @@ function validateEmailFocusOut() {
     if (emailInput.validity.valueMissing || emailInput.validity.typeMismatch) {
         emailErrorMsg.innerText = 'please enter a valid email address.';
         emailInput.style.border = '1px solid red';
+        emailInput.removeEventListener('focus', addValidFocusStyle);
         emailInput.addEventListener('focus', addInvalidFocusStyle);
         emailInput.addEventListener('focusout', removeFocusStyle);
     }
