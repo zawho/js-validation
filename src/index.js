@@ -209,6 +209,8 @@ function checkRulesFocusOut() {
     const lowercaseRegex = /[a-z]/;
     const uppercaseRule = document.querySelector('.uppercase-rule');
     const uppercaseRegex = /[A-Z]/;
+    const numberRule = document.querySelector('.number-rule');
+    const numberRegex = /[0-9]/;
     if (this.value.length < 8 && !this.validity.valueMissing) {
         lengthRule.style.color = 'red';
     }
@@ -218,16 +220,21 @@ function checkRulesFocusOut() {
     if (!uppercaseRegex.test(this.value) && !this.validity.valueMissing) {
         uppercaseRule.style.color = 'red';
     }
+    if (!numberRegex.test(this.value) && !this.validity.valueMissing) {
+        numberRule.style.color = 'red';
+    }
 }
 
 function resetRuleStyles() {
     const lengthRule = document.querySelector('.length-rule');
     const lowercaseRule = document.querySelector('.lowercase-rule');
     const uppercaseRule = document.querySelector('.uppercase-rule');
+    const numberRule = document.querySelector('.number-rule');
     if (this.validity.valueMissing) {
         lengthRule.style.color = 'black';
         lowercaseRule.style.color = 'black';
         uppercaseRule.style.color = 'black';
+        numberRule.style.color = 'black';
     }
 }
 
@@ -237,6 +244,8 @@ function checkRulesOnInput() {
     const lowercaseRegex = /[a-z]/;
     const uppercaseRule = document.querySelector('.uppercase-rule');
     const uppercaseRegex = /[A-Z]/;
+    const numberRule = document.querySelector('.number-rule');
+    const numberRegex = /[0-9]/;
     if (this.value.length >= 8) {
         lengthRule.style.color = 'green';
     } else if (this.value.length < 8 && lengthRule.style.color === 'green') {
@@ -251,6 +260,11 @@ function checkRulesOnInput() {
         uppercaseRule.style.color = 'green';
     } else if (!uppercaseRegex.test(this.value) && uppercaseRule.style.color === 'green') {
         uppercaseRule.style.color = 'red';
+    }
+    if (numberRegex.test(this.value)) {
+        numberRule.style.color = 'green';
+    } else if (!numberRegex.test(this.value) && numberRule.style.color === 'green') {
+        numberRule.style.color = 'red';
     }
 }
 
