@@ -188,29 +188,6 @@ function resetPassStyles() {
     }
 }
 
-function checkRulesFocusOut() {
-    const lengthRule = document.querySelector('.length-rule');
-    if (this.value.length < 8) {
-        lengthRule.style.color = 'red';
-    }
-}
-
-function resetRuleStyles() {
-    const lengthRule = document.querySelector('.length-rule');
-    if (this.validity.valueMissing) {
-        lengthRule.style.color = 'black';
-    }
-}
-
-function checkRulesOnInput() {
-    const lengthRule = document.querySelector('.length-rule');
-    if (this.value.length >= 8) {
-        lengthRule.style.color = 'green';
-    } else if (this.value.length < 8 && lengthRule.style.color === 'green') {
-        lengthRule.style.color = 'red';
-    }
-}
-
 function validatePassInput() {
     if (this.validity.valid) {
         this.style.border = '1px solid green';
@@ -226,14 +203,51 @@ function validatePassInput() {
     }
 }
 
+function checkRulesFocusOut() {
+    const lengthRule = document.querySelector('.length-rule');
+    const lowercaseRule = document.querySelector('.lowercase-rule');
+    const lowercaseRegex = /[a-z]/;
+    if (this.value.length < 8) {
+        lengthRule.style.color = 'red';
+    }
+    if (!lowercaseRegex.test(this.value)) {
+        lowercaseRule.style.color = 'red';
+    }
+}
+
+function resetRuleStyles() {
+    const lengthRule = document.querySelector('.length-rule');
+    const lowercaseRule = document.querySelector('.lowercase-rule');
+    if (this.validity.valueMissing) {
+        lengthRule.style.color = 'black';
+        lowercaseRule.style.color = 'black';
+    }
+}
+
+function checkRulesOnInput() {
+    const lengthRule = document.querySelector('.length-rule');
+    const lowercaseRule = document.querySelector('.lowercase-rule');
+    const lowercaseRegex = /[a-z]/;
+    if (this.value.length >= 8) {
+        lengthRule.style.color = 'green';
+    } else if (this.value.length < 8 && lengthRule.style.color === 'green') {
+        lengthRule.style.color = 'red';
+    }
+    if (lowercaseRegex.test(this.value)) {
+        lowercaseRule.style.color = 'green';
+    } else if (!lowercaseRegex.test(this.value) && lowercaseRule.style.color === 'green') {
+        lowercaseRule.style.color = 'red';
+    }
+}
+
 function setPassEvents() {
     const passInput = document.querySelector('.pw-input');
     const passCheckbox = document.querySelector('.pw-checkbox');
     passInput.addEventListener('focusout', validatePassFocusOut);
-    passInput.addEventListener('focusout', checkRulesFocusOut);
     passInput.addEventListener('input', resetPassStyles);
-    passInput.addEventListener('input', resetRuleStyles);
     passInput.addEventListener('input', validatePassInput);
+    passInput.addEventListener('focusout', checkRulesFocusOut);
+    passInput.addEventListener('input', resetRuleStyles);
     passInput.addEventListener('input', checkRulesOnInput);
     passCheckbox.addEventListener('click', showPassword);
 }
