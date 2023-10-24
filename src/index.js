@@ -159,7 +159,23 @@ function setZipEvents() {
     zipInput.addEventListener('input', resetNeutralZipStyles);
 }
 
+function showPassword() {
+    const passInput = document.querySelector('.pw-input');
+    if (this.checked === true) {
+        passInput.type = 'text';
+    } else {
+        passInput.type = 'password';
+    }
+}
+
+function setPassEvents() {
+    // const passInput = document.querySelector('.pw-input');
+    const passCheckbox = document.querySelector('.pw-checkbox');
+    passCheckbox.addEventListener('click', showPassword);
+}
+
 window.addEventListener('load', resetForm);
 setEmailEvents();
 setCountryEvents();
 setZipEvents();
+setPassEvents();
