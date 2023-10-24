@@ -178,13 +178,36 @@ function validatePassFocusOut() {
     }
 }
 
-function resetPassZipStyles() {
+function resetPassStyles() {
     if (this.validity.valueMissing) {
         this.style.border = '1px solid grey';
         this.style.outline = '2px solid blue';
         this.addEventListener('focus', addNeutralFocusStyle);
         this.removeEventListener('focus', addValidFocusStyle);
         this.removeEventListener('focus', addInvalidFocusStyle);
+    }
+}
+
+function checkRulesFocusOut() {
+    const lengthRule = document.querySelector('.length-rule');
+    if (this.value.length < 8) {
+        lengthRule.style.color = 'red';
+    }
+}
+
+function resetRuleStyles() {
+    const lengthRule = document.querySelector('.length-rule');
+    if (this.validity.valueMissing) {
+        lengthRule.style.color = 'black';
+    }
+}
+
+function checkRulesOnInput() {
+    const lengthRule = document.querySelector('.length-rule');
+    if (this.value.length >= 8) {
+        lengthRule.style.color = 'green';
+    } else if (this.value.length < 8 && lengthRule.style.color === 'green') {
+        lengthRule.style.color = 'red';
     }
 }
 
@@ -207,8 +230,11 @@ function setPassEvents() {
     const passInput = document.querySelector('.pw-input');
     const passCheckbox = document.querySelector('.pw-checkbox');
     passInput.addEventListener('focusout', validatePassFocusOut);
-    passInput.addEventListener('input', resetPassZipStyles);
+    passInput.addEventListener('focusout', checkRulesFocusOut);
+    passInput.addEventListener('input', resetPassStyles);
+    passInput.addEventListener('input', resetRuleStyles);
     passInput.addEventListener('input', validatePassInput);
+    passInput.addEventListener('input', checkRulesOnInput);
     passCheckbox.addEventListener('click', showPassword);
 }
 
