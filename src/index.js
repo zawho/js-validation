@@ -207,20 +207,27 @@ function checkRulesFocusOut() {
     const lengthRule = document.querySelector('.length-rule');
     const lowercaseRule = document.querySelector('.lowercase-rule');
     const lowercaseRegex = /[a-z]/;
+    const uppercaseRule = document.querySelector('.uppercase-rule');
+    const uppercaseRegex = /[A-Z]/;
     if (this.value.length < 8 && !this.validity.valueMissing) {
         lengthRule.style.color = 'red';
     }
     if (!lowercaseRegex.test(this.value) && !this.validity.valueMissing) {
         lowercaseRule.style.color = 'red';
     }
+    if (!uppercaseRegex.test(this.value) && !this.validity.valueMissing) {
+        uppercaseRule.style.color = 'red';
+    }
 }
 
 function resetRuleStyles() {
     const lengthRule = document.querySelector('.length-rule');
     const lowercaseRule = document.querySelector('.lowercase-rule');
+    const uppercaseRule = document.querySelector('.uppercase-rule');
     if (this.validity.valueMissing) {
         lengthRule.style.color = 'black';
         lowercaseRule.style.color = 'black';
+        uppercaseRule.style.color = 'black';
     }
 }
 
@@ -228,6 +235,8 @@ function checkRulesOnInput() {
     const lengthRule = document.querySelector('.length-rule');
     const lowercaseRule = document.querySelector('.lowercase-rule');
     const lowercaseRegex = /[a-z]/;
+    const uppercaseRule = document.querySelector('.uppercase-rule');
+    const uppercaseRegex = /[A-Z]/;
     if (this.value.length >= 8) {
         lengthRule.style.color = 'green';
     } else if (this.value.length < 8 && lengthRule.style.color === 'green') {
@@ -237,6 +246,11 @@ function checkRulesOnInput() {
         lowercaseRule.style.color = 'green';
     } else if (!lowercaseRegex.test(this.value) && lowercaseRule.style.color === 'green') {
         lowercaseRule.style.color = 'red';
+    }
+    if (uppercaseRegex.test(this.value)) {
+        uppercaseRule.style.color = 'green';
+    } else if (!uppercaseRegex.test(this.value) && uppercaseRule.style.color === 'green') {
+        uppercaseRule.style.color = 'red';
     }
 }
 
