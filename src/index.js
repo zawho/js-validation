@@ -211,6 +211,8 @@ function checkRulesFocusOut() {
     const uppercaseRegex = /[A-Z]/;
     const numberRule = document.querySelector('.number-rule');
     const numberRegex = /[0-9]/;
+    const specialRule = document.querySelector('.special-rule');
+    const specialRegEx = /[!@#$%^&*?]/;
     if (this.value.length < 8 && !this.validity.valueMissing) {
         lengthRule.style.color = 'red';
     }
@@ -223,6 +225,9 @@ function checkRulesFocusOut() {
     if (!numberRegex.test(this.value) && !this.validity.valueMissing) {
         numberRule.style.color = 'red';
     }
+    if (!specialRegEx.test(this.value) && !this.validity.valueMissing) {
+        specialRule.style.color = 'red';
+    }
 }
 
 function resetRuleStyles() {
@@ -230,11 +235,13 @@ function resetRuleStyles() {
     const lowercaseRule = document.querySelector('.lowercase-rule');
     const uppercaseRule = document.querySelector('.uppercase-rule');
     const numberRule = document.querySelector('.number-rule');
+    const specialRule = document.querySelector('.special-rule');
     if (this.validity.valueMissing) {
         lengthRule.style.color = 'black';
         lowercaseRule.style.color = 'black';
         uppercaseRule.style.color = 'black';
         numberRule.style.color = 'black';
+        specialRule.style.color = 'black';
     }
 }
 
@@ -246,6 +253,8 @@ function checkRulesOnInput() {
     const uppercaseRegex = /[A-Z]/;
     const numberRule = document.querySelector('.number-rule');
     const numberRegex = /[0-9]/;
+    const specialRule = document.querySelector('.special-rule');
+    const specialRegEx = /[!@#$%^&*?]/;
     if (this.value.length >= 8) {
         lengthRule.style.color = 'green';
     } else if (this.value.length < 8 && lengthRule.style.color === 'green') {
@@ -265,6 +274,11 @@ function checkRulesOnInput() {
         numberRule.style.color = 'green';
     } else if (!numberRegex.test(this.value) && numberRule.style.color === 'green') {
         numberRule.style.color = 'red';
+    }
+    if (specialRegEx.test(this.value)) {
+        specialRule.style.color = 'green';
+    } else if (!specialRegEx.test(this.value) && specialRule.style.color === 'green') {
+        specialRule.style.color = 'red';
     }
 }
 
