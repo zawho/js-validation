@@ -25,10 +25,18 @@
         <div class="error-msg" id="zip-error-msg"></div>
         <div class="pw-container">
             <label for="pw">password*</label>
-            <input type="password" class="pw-input" id="pw" required>
+            <input type="password" class="pw-input" id="pw" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
+            <br>
             <br>
             <label for="checkbox">show password</label>
             <input type="checkbox" class="pw-checkbox" id="checkbox">
+        </div>
+        <div class="pw-rules">
+            <div class="length-rule">at least 8 characters.</div>
+            <div class="lowercase-rule">at least 1 lowercase letter.</div>
+            <div class="uppercase-rule">at least 1 uppercase letter.</div>
+            <div class="number-rule">at least 1 number.</div>
+            <div class="special-rule">at least 1 special character.</div>
         </div>
         <div class="pw-confirm-container">
             <label for="pw-confirm">confirm password*</label>
