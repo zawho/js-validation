@@ -20,8 +20,9 @@
         <div class="error-msg" id="country-error-msg"></div>
         <div class="zip-container">
             <label for="zip">zip code*</label>
-            <input type="text" class="zip-input" id="zip" required>
+            <input type="text" class="zip-input" id="zip" pattern="\d{5}" required>
         </div>
+        <div class="error-msg" id="zip-error-msg"></div>
         <div class="pw-container">
             <label for="pw">password*</label>
             <input type="password" class="pw-input" id="pw" required>
