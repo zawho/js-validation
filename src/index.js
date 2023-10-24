@@ -5,7 +5,6 @@ function resetForm() {
     sampleForm.reset();
 }
 
-
 function addInvalidFocusStyle() {
     this.style.outline = '2px solid red';
 }
@@ -109,6 +108,58 @@ function setCountryEvents() {
     countryInput.addEventListener('input', resetNeutralCountryStyles);
 }
 
+function validateZipFocusOut() {
+    const zipErrorMsg = document.querySelector('#zip-error-msg');
+    if (this.validity.patternMismatch) {
+        zipErrorMsg.innerText = 'please enter a valid zip code, must be 5 digits.';
+        this.style.border = '1px solid red';
+        this.removeEventListener('focus', addValidFocusStyle);
+        this.removeEventListener('focus', addNeutralFocusStyle);
+        this.addEventListener('focus', addInvalidFocusStyle);
+        this.addEventListener('focusout', removeFocusStyle);
+    }
+}
+
+function resetNeutralZipStyles() {
+    const zipErrorMsg = document.querySelector('#zip-error-msg');
+    if (this.validity.valueMissing) {
+        this.style.border = '1px solid grey';
+        this.style.outline = '2px solid blue';
+        this.addEventListener('focus', addNeutralFocusStyle);
+        this.removeEventListener('focus', addValidFocusStyle);
+        this.removeEventListener('focus', addInvalidFocusStyle);
+        zipErrorMsg.innerText = '';
+    }
+}
+
+function validateZipInput() {
+    const zipErrorMsg = document.querySelector('#zip-error-msg');
+    if (this.validity.valid) {
+        this.style.border = '1px solid green';
+        this.style.outline = '2px solid green';
+        this.addEventListener('focus', addValidFocusStyle);
+        this.addEventListener('focusout', removeFocusStyle);
+    }
+    if (!this.validity.valid && this.style.border === '1px solid green') {
+        this.style.border = '1px solid red';
+        this.style.outline = '2px solid red';
+        this.addEventListener('focus', addInvalidFocusStyle);
+        this.addEventListener('focusout', removeFocusStyle);
+        zipErrorMsg.innerText = 'please enter a valid zip code, must be 5 digits.';
+    }
+    if (this.validity.valid && !(zipErrorMsg.innerText === '')) {
+        zipErrorMsg.innerText = '';
+    }
+}
+
+function setZipEvents() {
+    const zipInput = document.querySelector('.zip-input');
+    zipInput.addEventListener('focusout', validateZipFocusOut);
+    zipInput.addEventListener('input', validateZipInput);
+    zipInput.addEventListener('input', resetNeutralZipStyles);
+}
+
 window.addEventListener('load', resetForm);
 setEmailEvents();
 setCountryEvents();
+setZipEvents();
