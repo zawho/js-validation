@@ -168,9 +168,47 @@ function showPassword() {
     }
 }
 
+function validatePassFocusOut() {
+    if (this.validity.patternMismatch) {
+        this.style.border = '1px solid red';
+        this.removeEventListener('focus', addValidFocusStyle);
+        this.removeEventListener('focus', addNeutralFocusStyle);
+        this.addEventListener('focus', addInvalidFocusStyle);
+        this.addEventListener('focusout', removeFocusStyle);
+    }
+}
+
+function resetPassZipStyles() {
+    if (this.validity.valueMissing) {
+        this.style.border = '1px solid grey';
+        this.style.outline = '2px solid blue';
+        this.addEventListener('focus', addNeutralFocusStyle);
+        this.removeEventListener('focus', addValidFocusStyle);
+        this.removeEventListener('focus', addInvalidFocusStyle);
+    }
+}
+
+function validatePassInput() {
+    if (this.validity.valid) {
+        this.style.border = '1px solid green';
+        this.style.outline = '2px solid green';
+        this.addEventListener('focus', addValidFocusStyle);
+        this.addEventListener('focusout', removeFocusStyle);
+    }
+    if (!this.validity.valid && this.style.border === '1px solid green') {
+        this.style.border = '1px solid red';
+        this.style.outline = '2px solid red';
+        this.addEventListener('focus', addInvalidFocusStyle);
+        this.addEventListener('focusout', removeFocusStyle);
+    }
+}
+
 function setPassEvents() {
-    // const passInput = document.querySelector('.pw-input');
+    const passInput = document.querySelector('.pw-input');
     const passCheckbox = document.querySelector('.pw-checkbox');
+    passInput.addEventListener('focusout', validatePassFocusOut);
+    passInput.addEventListener('input', resetPassZipStyles);
+    passInput.addEventListener('input', validatePassInput);
     passCheckbox.addEventListener('click', showPassword);
 }
 
