@@ -207,10 +207,10 @@ function checkRulesFocusOut() {
     const lengthRule = document.querySelector('.length-rule');
     const lowercaseRule = document.querySelector('.lowercase-rule');
     const lowercaseRegex = /[a-z]/;
-    if (this.value.length < 8) {
+    if (this.value.length < 8 && !this.validity.valueMissing) {
         lengthRule.style.color = 'red';
     }
-    if (!lowercaseRegex.test(this.value)) {
+    if (!lowercaseRegex.test(this.value) && !this.validity.valueMissing) {
         lowercaseRule.style.color = 'red';
     }
 }
