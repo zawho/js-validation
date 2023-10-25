@@ -59,7 +59,7 @@ function validateEmailInput() {
 }
 
 function setEmailEvents() {
-    const emailInput = document.querySelector('.email-input');
+    const emailInput = document.querySelector('#email');
     emailInput.addEventListener('focusout', validateEmailFocusOut);
     emailInput.addEventListener('input', validateEmailInput);
     emailInput.addEventListener('input', resetNeutralEmailStyles);
@@ -102,7 +102,7 @@ function validateCountryInput() {
 }
 
 function setCountryEvents() {
-    const countryInput = document.querySelector('.country-input');
+    const countryInput = document.querySelector('#country');
     countryInput.addEventListener('focusout', validateCountryFocusOut);
     countryInput.addEventListener('input', validateCountryInput);
     countryInput.addEventListener('input', resetNeutralCountryStyles);
@@ -153,14 +153,14 @@ function validateZipInput() {
 }
 
 function setZipEvents() {
-    const zipInput = document.querySelector('.zip-input');
+    const zipInput = document.querySelector('#zip');
     zipInput.addEventListener('focusout', validateZipFocusOut);
     zipInput.addEventListener('input', validateZipInput);
     zipInput.addEventListener('input', resetNeutralZipStyles);
 }
 
 function showPassword() {
-    const passInput = document.querySelector('.pw-input');
+    const passInput = document.querySelector('#pw');
     if (this.checked === true) {
         passInput.type = 'text';
     } else {
@@ -189,7 +189,7 @@ function resetPassStyles() {
 }
 
 function validatePassInput() {
-    const confirmPassInput = document.querySelector('.pw-confirm-input');
+    const confirmPassInput = document.querySelector('#pw-confirm');
     const confirmErrorMsg = document.querySelector('#confirm-error-msg');
     if (this.validity.valid) {
         this.style.border = '1px solid green';
@@ -294,7 +294,7 @@ function checkRulesOnInput() {
 }
 
 function setPassEvents() {
-    const passInput = document.querySelector('.pw-input');
+    const passInput = document.querySelector('#pw');
     const passCheckbox = document.querySelector('.pw-checkbox');
     passInput.addEventListener('focusout', validatePassFocusOut);
     passInput.addEventListener('input', resetPassStyles);
@@ -319,7 +319,7 @@ function resetNeutralConfirmPassStyles() {
 
 function validateConfirmPassInput() {
     const confirmErrorMsg = document.querySelector('#confirm-error-msg');
-    const passInput = document.querySelector('.pw-input');
+    const passInput = document.querySelector('#pw');
     if (this.value === passInput.value) {
         this.style.border = '1px solid green';
         this.style.outline = '2px solid green';
@@ -339,9 +339,29 @@ function validateConfirmPassInput() {
 }
 
 function setConfirmPassEvents() {
-    const confirmPassInput = document.querySelector('.pw-confirm-input');
+    const confirmPassInput = document.querySelector('#pw-confirm');
     confirmPassInput.addEventListener('input', validateConfirmPassInput);
     confirmPassInput.addEventListener('input', resetNeutralConfirmPassStyles);
+}
+
+function validateOnSubmit() {
+     const allInputs = document.querySelectorAll('.sample-form .form-input');
+     const submitMsg = document.querySelector('.submit-msg');
+     const allInputsArr = Array.from(allInputs);
+     for (let i = 0; i < allInputsArr.length; i++) {
+        if (!(allInputsArr[i].style.border === '1px solid green')) {
+            submitMsg.style.color = 'red';
+            submitMsg.innerText = 'one or more field is invalid or empty.';
+        } else {
+            submitMsg.style.color = 'green';
+            submitMsg.innerText = 'everything looks good. woohoo!';
+        }
+     }
+}
+
+function setSubmitEvent() {
+    const submitBtn = document.querySelector('.submit-btn');
+    submitBtn.addEventListener('click', validateOnSubmit);
 }
 
 window.addEventListener('load', resetForm);
@@ -350,3 +370,4 @@ setCountryEvents();
 setZipEvents();
 setPassEvents();
 setConfirmPassEvents();
+setSubmitEvent();
