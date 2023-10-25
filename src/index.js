@@ -348,13 +348,12 @@ function validateOnSubmit() {
      const allInputs = document.querySelectorAll('.sample-form .form-input');
      const submitMsg = document.querySelector('.submit-msg');
      const allInputsArr = Array.from(allInputs);
+     submitMsg.style.color = 'green';
+     submitMsg.innerText = 'everything looks good. woohoo!';
      for (let i = 0; i < allInputsArr.length; i++) {
         if (!(allInputsArr[i].style.border === '1px solid green')) {
             submitMsg.style.color = 'red';
             submitMsg.innerText = 'one or more field is invalid or empty.';
-        } else {
-            submitMsg.style.color = 'green';
-            submitMsg.innerText = 'everything looks good. woohoo!';
         }
      }
 }
