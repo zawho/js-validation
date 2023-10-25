@@ -10,22 +10,22 @@
     <form class="sample-form" novalidate>
         <div class="email-container">
             <label for="email">email*</label>
-            <input type="email" class="email-input" id="email" required>
+            <input type="email" class="form-input" id="email" required>
         </div>
         <div class="error-msg" id="email-error-msg"></div>
         <div class="country-container">
             <label for="country">country*</label>
-            <input type="text" class="country-input" id="country" required>
+            <input type="text" class="form-input" id="country" required>
         </div>
         <div class="error-msg" id="country-error-msg"></div>
         <div class="zip-container">
             <label for="zip">zip code*</label>
-            <input type="text" class="zip-input" id="zip" pattern="\d{5}" required>
+            <input type="text" class="form-input" id="zip" pattern="\d{5}" required>
         </div>
         <div class="error-msg" id="zip-error-msg"></div>
         <div class="pw-container">
             <label for="pw">password*</label>
-            <input type="password" class="pw-input" id="pw" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,}$" required>
+            <input type="password" class="form-input" id="pw" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^])[A-Za-z\d@$!%*?&#^]{8,}$" required>
             <br>
             <br>
             <label for="checkbox">show password</label>
@@ -40,10 +40,11 @@
         </div>
         <div class="pw-confirm-container">
             <label for="pw-confirm">confirm password*</label>
-            <input type="password" class="pw-confirm-input" id="pw-confirm" required>
+            <input type="password" class="form-input" id="pw-confirm" required>
         </div>
         <div class="error-msg" id="confirm-error-msg"></div>
         <button type="button" class="submit-btn">submit</button>
+        <div class="submit-msg"></div>
     </form>
   </body>
 </html>
