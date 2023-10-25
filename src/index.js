@@ -327,15 +327,19 @@ function validateConfirmPassInput() {
         this.style.outline = '2px solid green';
         this.addEventListener('focus', addValidFocusStyle);
         this.addEventListener('focusout', removeFocusStyle);
-    }
-    if (this.validity.valid && !(confirmErrorMsg.innerText === '')) {
         confirmErrorMsg.innerText = '';
+    }
+    if (!(this.value === passInput.value)) {
+        this.style.border = '1px solid red';
+        this.style.outline = '2px solid red';
+        this.addEventListener('focus', addInvalidFocusStyle);
+        this.addEventListener('focusout', removeFocusStyle);
+        confirmErrorMsg.innerText = 'passwords do not match.';
     }
 }
 
 function setConfirmPassEvents() {
     const confirmPassInput = document.querySelector('.pw-confirm-input');
-    confirmPassInput.addEventListener('focusout', validateConfirmPassFocusOut);
     confirmPassInput.addEventListener('input', validateConfirmPassInput);
     confirmPassInput.addEventListener('input', resetNeutralConfirmPassStyles);
 }
