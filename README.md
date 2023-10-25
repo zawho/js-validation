@@ -1,1 +1,3 @@
 October 23, 2023 - I am beginning a small project to test out what I've learned about Javascript form validation and the constraint validation API. I will build a simple HTML form that collects email, country, zip code, and a password + password confirmation. It will use live inline validation to inform the user of whether or not they have filled out the fields correct.
+
+October 25, 2023 - I have finished the validation project. I kept it pretty simple, added only the necessary styles. I tried to do each validation check in a live "lazy aggressive" inline style with the constraint validation API, except for the confirm password check, which I did more aggressively.
