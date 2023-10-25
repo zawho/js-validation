@@ -189,6 +189,8 @@ function resetPassStyles() {
 }
 
 function validatePassInput() {
+    const confirmPassInput = document.querySelector('.pw-confirm-input');
+    const confirmErrorMsg = document.querySelector('#confirm-error-msg');
     if (this.validity.valid) {
         this.style.border = '1px solid green';
         this.style.outline = '2px solid green';
@@ -200,6 +202,15 @@ function validatePassInput() {
         this.style.outline = '2px solid red';
         this.addEventListener('focus', addInvalidFocusStyle);
         this.addEventListener('focusout', removeFocusStyle);
+    }
+    if (!(confirmPassInput.value === '')) {
+        confirmPassInput.value = '';
+        confirmPassInput.style.border = '1px solid grey';
+        confirmPassInput.removeEventListener('focus', addValidFocusStyle);
+        confirmPassInput.removeEventListener('focus', addInvalidFocusStyle);
+        confirmPassInput.addEventListener('focus', addNeutralFocusStyle);
+        confirmPassInput.addEventListener('focusout', removeFocusStyle);
+        confirmErrorMsg.innerText = '';
     }
 }
 
@@ -294,19 +305,6 @@ function setPassEvents() {
     passCheckbox.addEventListener('click', showPassword);
 }
 
-function validateConfirmPassFocusOut() {
-    const confirmErrorMsg = document.querySelector('#confirm-error-msg');
-    const passInput = document.querySelector('.pw-input');
-    if (!(this.value === passInput.value)) {
-        confirmErrorMsg.innerText = 'passwords do not match.';
-        this.style.border = '1px solid red';
-        this.removeEventListener('focus', addValidFocusStyle);
-        this.removeEventListener('focus', addNeutralFocusStyle);
-        this.addEventListener('focus', addInvalidFocusStyle);
-        this.addEventListener('focusout', removeFocusStyle);
-    }
-}
-
 function resetNeutralConfirmPassStyles() {
     const confirmErrorMsg = document.querySelector('#confirm-error-msg');
     if (this.validity.valueMissing) {
@@ -325,6 +323,7 @@ function validateConfirmPassInput() {
     if (this.value === passInput.value) {
         this.style.border = '1px solid green';
         this.style.outline = '2px solid green';
+        this.removeEventListener('focus', addInvalidFocusStyle);
         this.addEventListener('focus', addValidFocusStyle);
         this.addEventListener('focusout', removeFocusStyle);
         confirmErrorMsg.innerText = '';
@@ -332,6 +331,7 @@ function validateConfirmPassInput() {
     if (!(this.value === passInput.value)) {
         this.style.border = '1px solid red';
         this.style.outline = '2px solid red';
+        this.removeEventListener('focus', addValidFocusStyle);
         this.addEventListener('focus', addInvalidFocusStyle);
         this.addEventListener('focusout', removeFocusStyle);
         confirmErrorMsg.innerText = 'passwords do not match.';
